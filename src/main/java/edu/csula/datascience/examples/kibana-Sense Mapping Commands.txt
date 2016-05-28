@@ -1,0 +1,26 @@
+...delete the entire index is required because we cannot change existing mapping
+
+DELETE /weather-data
+
+...This add up the index mapping before we add the data
+
+PUT /weather-data
+{
+    "mappings" : {
+        "city-temperatures" : {
+            "properties" : {
+                "station_name" : {
+                    "type" : "string",
+                    "index" : "not_analyzed"
+                },
+                "date": {
+                    "type": "date"
+                }
+            }
+        }
+    }
+}
+
+..After data inserted back to the index, we can check the mapping by
+
+GET /weather-data/city-temperatures/_mapping
